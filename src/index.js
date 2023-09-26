@@ -64,7 +64,7 @@ app.post('/account', (request, response) => {
           name,
           id: uuidv4(),
           statement: []
-     })
+     });
 
      return response.status(201).send();
 });
@@ -142,5 +142,16 @@ app.get('/account', verifyIfExistsAccountCPF, (request, response) => {
 
      return response.json(customer);
 })
+
+app.delete('/account', verifyIfExistsAccountCPF, (request, response) => {
+     const { customer } = request;
+
+     //splice
+     customers.splice(customers.indexOf(customer), 1);
+
+     return response.status(200).json(customers);
+})
+
+
 
 app.listen(3333)
